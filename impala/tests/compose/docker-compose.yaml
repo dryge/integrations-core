@@ -75,4 +75,5 @@ volumes:
 
 networks:
   impala-network:
+    # If you do not force the name, it will use `docker_impala-network`, which is rejected by Java's URL parser
     name: impala-network
