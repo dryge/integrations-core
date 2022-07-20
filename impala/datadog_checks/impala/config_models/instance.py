@@ -7,7 +7,6 @@
 #     ddev -x validate config -s <INTEGRATION_NAME>
 #     ddev -x validate models -s <INTEGRATION_NAME>
 
-
 from __future__ import annotations
 
 from typing import Optional, Sequence
@@ -27,6 +26,7 @@ class InstanceConfig(BaseModel):
     collect_default_jvm_metrics: Optional[bool]
     empty_default_hostname: Optional[bool]
     host: str
+    is_jmx: Optional[bool]
     java_bin_path: Optional[str]
     java_options: Optional[str]
     jmx_url: Optional[str]

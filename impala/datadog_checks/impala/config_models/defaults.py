@@ -7,8 +7,11 @@
 #     ddev -x validate config -s <INTEGRATION_NAME>
 #     ddev -x validate models -s <INTEGRATION_NAME>
 
-
 from datadog_checks.base.utils.models.fields import get_default_field_value
+
+
+def shared_collect_default_metrics(field, value):
+    return False
 
 
 def shared_conf(field, value):
@@ -32,6 +35,10 @@ def instance_collect_default_jvm_metrics(field, value):
 
 
 def instance_empty_default_hostname(field, value):
+    return False
+
+
+def instance_is_jmx(field, value):
     return False
 
 
