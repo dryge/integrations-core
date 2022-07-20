@@ -19,7 +19,11 @@ def dd_environment():
         conditions=[
             CheckDockerLogs(
                 identifier=compose_file,
-                patterns="Connected to metastore.",
+                patterns=[
+                    "Connected to metastore.",
+                    "Impala has started.",
+                    "CatalogService started",
+                ],
                 matches='all',
                 wait=5,
                 attempts=20,
