@@ -6,7 +6,7 @@
   "metric_prefix": "impala.",
   "metric_to_check": "",
   "creates_events": false,
-  "short_description": "",
+  "short_description": "Track all your Impala metrics with Datadog",
   "guid": "3ac90b0b-bf49-46ba-8a7a-135fdef28c74",
   "support": "core",
   "supported_os": [
