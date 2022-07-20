@@ -1,0 +1,35 @@
+{
+  "display_name": "Impala",
+  "maintainer": "help@datadoghq.com",
+  "manifest_version": "1.0.0",
+  "name": "impala",
+  "metric_prefix": "impala.",
+  "metric_to_check": "",
+  "creates_events": false,
+  "short_description": "",
+  "guid": "3ac90b0b-bf49-46ba-8a7a-135fdef28c74",
+  "support": "core",
+  "supported_os": [
+    "linux",
+    "mac_os",
+    "windows"
+  ],
+  "public_title": "Impala",
+  "categories": [
+    ""
+  ],
+  "type": "check",
+  "is_public": true,
+  "integration_id": "impala",
+  "assets": {
+    "configuration": {
+      "spec": "assets/configuration/spec.yaml"
+    },
+    "dashboards": {},
+    "monitors": {},
+    "saved_views": {},
+    "service_checks": "assets/service_checks.json",
+    "logs": {},
+    "metrics_metadata": "metadata.csv"
+  }
+}
