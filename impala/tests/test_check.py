@@ -9,19 +9,22 @@ from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.mark.unit
-def test_mock_assert_metrics_using_metadata(dd_run_check, aggregator, check, mock_metrics):
+@pytest.mark.usefixtures("mock_metrics")
+def test_mock_assert_metrics_using_metadata(dd_run_check, aggregator, check):
     dd_run_check(check)
     aggregator.assert_metrics_using_metadata(get_metadata_metrics())
 
 
 @pytest.mark.unit
-def test_mock_assert_service_check(dd_run_check, aggregator, check, mock_metrics):
+@pytest.mark.usefixtures("mock_metrics")
+def test_mock_assert_service_check(dd_run_check, aggregator, check):
     dd_run_check(check)
     aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
 
 
 @pytest.mark.unit
-def test_mock_assert_metrics(dd_run_check, aggregator, check, mock_metrics):
+@pytest.mark.usefixtures("mock_metrics")
+def test_mock_assert_metrics(dd_run_check, aggregator, check):
     dd_run_check(check)
 
     expected_metrics = [
