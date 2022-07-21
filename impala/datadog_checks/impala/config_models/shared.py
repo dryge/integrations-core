@@ -9,7 +9,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Mapping, Optional, Sequence
+from typing import Optional, Sequence
 
 from pydantic import BaseModel, root_validator, validator
 
@@ -19,16 +19,23 @@ from datadog_checks.base.utils.models import validation
 from . import defaults, validators
 
 
+class Proxy(BaseModel):
+    class Config:
+        allow_mutation = False
+
+    http: Optional[str]
+    https: Optional[str]
+    no_proxy: Optional[Sequence[str]]
+
+
 class SharedConfig(BaseModel):
     class Config:
         allow_mutation = False
 
-    collect_default_metrics: Optional[bool]
-    conf: Optional[Sequence[Mapping[str, Any]]]
-    is_jmx: bool
-    new_gc_metrics: Optional[bool]
+    proxy: Optional[Proxy]
     service: Optional[str]
-    service_check_prefix: Optional[str]
+    skip_proxy: Optional[bool]
+    timeout: Optional[float]
 
     @root_validator(pre=True)
     def _initial_validation(cls, values):

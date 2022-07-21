@@ -4,10 +4,10 @@
   "manifest_version": "1.0.0",
   "name": "impala",
   "metric_prefix": "impala.",
-  "metric_to_check": "",
+  "metric_to_check": "impala.jvm.gc.count",
   "creates_events": false,
   "short_description": "Track all your Impala metrics with Datadog",
-  "guid": "3ac90b0b-bf49-46ba-8a7a-135fdef28c74",
+  "guid": "faf33df8-b1e0-4529-a281-7e176b2365ec",
   "support": "core",
   "supported_os": [
     "linux",
