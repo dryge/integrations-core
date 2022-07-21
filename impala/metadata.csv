@@ -1,2 +1,2 @@
 metric_name,metric_type,interval,unit_name,per_unit_name,description,orientation,integration,short_name,curated_metric
-impala.jvm.gc.count,monotonic_count,,,,Jvm Garbage Collection Count,1,impala,gc count,
+impala.jvm.gc.count,count,,,,Jvm Garbage Collection Count,1,impala,gc count,
