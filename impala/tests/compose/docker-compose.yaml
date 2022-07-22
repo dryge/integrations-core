@@ -16,6 +16,7 @@ services:
     networks:
       - impala-network
   statestored:
+    container_name: statestored
     image: apache/impala:${IMPALA_VERSION}-statestored
     ports:
       # Web debug UI
@@ -26,6 +27,7 @@ services:
     networks:
       - impala-network
   catalogd:
+    container_name: catalogd
     depends_on:
       - statestored
       - hms
@@ -44,7 +46,8 @@ services:
       - ./conf:/opt/impala/conf:ro
     networks:
       - impala-network
-  impalad-1:
+  impalad:
+    container_name: impalad
     image: apache/impala:${IMPALA_VERSION}-impalad_coord_exec
     depends_on:
       - statestored
