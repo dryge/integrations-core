@@ -8,14 +8,10 @@ import pytest
 
 from datadog_checks.dev import docker_run, get_docker_hostname, get_here
 from datadog_checks.dev.conditions import CheckDockerLogs
-from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.fixture(scope="session")
 def dd_environment():
-    url = f"http://{get_docker_hostname()}:25000/metrics_prometheus"
-    instance = {"openmetrics_endpoint": url}
-
     compose_file = os.path.join(get_here(), "compose", "docker-compose.yaml")
     with docker_run(
         compose_file=compose_file,
@@ -32,21 +28,40 @@ def dd_environment():
                 attempts=20,
             )
         ],
-        endpoints=[url],
+        endpoints=[
+            f"http://{get_docker_hostname()}:25000/metrics_prometheus",
+            f"http://{get_docker_hostname()}:25010/metrics_prometheus",
+            f"http://{get_docker_hostname()}:25020/metrics_prometheus",
+        ],
     ):
-        yield instance
+        yield {
+            "openmetrics_endpoint": f"http://{get_docker_hostname()}:25000/metrics_prometheus",
+            "service_type": "daemon",
+        }
 
 
 @pytest.fixture
-def instance():
+def daemon_instance():
     return {
         "openmetrics_endpoint": f"http://{get_docker_hostname()}:25000/metrics_prometheus",
+        "service_type": "daemon",
     }
 
 
 @pytest.fixture
-def check(instance):
-    return ImpalaCheck("impala", {}, [instance])
+def catalog_instance():
+    return {
+        "openmetrics_endpoint": f"http://{get_docker_hostname()}:25010/metrics_prometheus",
+        "service_type": "catalog",
+    }
+
+
+@pytest.fixture
+def statestore_instance():
+    return {
+        "openmetrics_endpoint": f"http://{get_docker_hostname()}:25020/metrics_prometheus",
+        "service_type": "statestore",
+    }
 
 
 @pytest.fixture()

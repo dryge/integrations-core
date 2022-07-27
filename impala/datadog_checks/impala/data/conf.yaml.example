@@ -45,10 +45,15 @@ init_config:
 #
 instances:
 
+    ## @param service_type - string - required
+    ## The Impala service you want to monitor. Possible values are `daemon`, `statestore` and `catalog`.
+    #
+  - service_type: daemon
+
     ## @param openmetrics_endpoint - string - required
     ## The URL exposing metrics in the OpenMetrics format.
     #
-  - openmetrics_endpoint: http://%%host%%:25000/metrics_prometheus
+    openmetrics_endpoint: http://%%host%%:25000/metrics_prometheus
 
     ## @param raw_metric_prefix - string - optional
     ## A prefix that will be removed from all exposed metric names, if present.

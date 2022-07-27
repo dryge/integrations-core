@@ -9,8 +9,8 @@ from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.mark.e2e
-def test_check_e2e_assert_metrics(dd_agent_check, instance):
-    aggregator = dd_agent_check(instance, rate=True)
+def test_daemon_check_e2e_assert_metrics(dd_agent_check, daemon_instance):
+    aggregator = dd_agent_check(daemon_instance, rate=True)
 
     expected_metrics = [
         {
@@ -30,12 +30,12 @@ def test_check_e2e_assert_metrics(dd_agent_check, instance):
 
 
 @pytest.mark.e2e
-def test_check_e2e_assert_service_check(dd_agent_check, instance):
-    aggregator = dd_agent_check(instance, rate=True)
+def test_daemon_check_e2e_assert_service_check(dd_agent_check, daemon_instance):
+    aggregator = dd_agent_check(daemon_instance, rate=True)
     aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
 
 
 @pytest.mark.e2e
-def test_check_e2e_assert_metrics_using_metadata(dd_agent_check, instance):
-    aggregator = dd_agent_check(instance, rate=True)
+def test_daemon_check_e2e_assert_metrics_using_metadata(dd_agent_check, daemon_instance):
+    aggregator = dd_agent_check(daemon_instance, rate=True)
     aggregator.assert_metrics_using_metadata(get_metadata_metrics())

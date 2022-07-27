@@ -10,7 +10,8 @@ from datadog_checks.impala import ImpalaCheck
 
 @pytest.mark.integration
 @pytest.mark.usefixtures("dd_environment")
-def test_check_integration_assert_metrics(dd_run_check, aggregator, check):
+def test_daemon_check_integration_assert_metrics(dd_run_check, aggregator, daemon_instance):
+    check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
 
     expected_metrics = [
@@ -33,13 +34,15 @@ def test_check_integration_assert_metrics(dd_run_check, aggregator, check):
 
 @pytest.mark.integration
 @pytest.mark.usefixtures("dd_environment")
-def test_check_integration_assert_service_check(dd_run_check, aggregator, check):
+def test_daemon_check_integration_assert_service_check(dd_run_check, aggregator, daemon_instance):
+    check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
     aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
 
 
 @pytest.mark.integration
 @pytest.mark.usefixtures("dd_environment")
-def test_check_integration_assert_metrics_using_metadata(dd_run_check, aggregator, check):
+def test_daemon_check_integration_assert_metrics_using_metadata(dd_run_check, aggregator, daemon_instance):
+    check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
     aggregator.assert_metrics_using_metadata(get_metadata_metrics())
