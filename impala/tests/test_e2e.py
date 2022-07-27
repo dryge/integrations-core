@@ -15,7 +15,7 @@ def test_check_e2e_assert_metrics(dd_agent_check, instance):
     expected_metrics = [
         {
             "name": "impala.jvm.gc.count",
-            "type": aggregator.MONOTONIC_COUNT,
+            "type": aggregator.COUNT,
         },
     ]
 
@@ -27,7 +27,6 @@ def test_check_e2e_assert_metrics(dd_agent_check, instance):
         )
 
     aggregator.assert_all_metrics_covered()
-    aggregator.assert_no_duplicate_all()
 
 
 @pytest.mark.e2e
