@@ -16,7 +16,7 @@ def test_daemon_check_integration_assert_metrics(dd_run_check, aggregator, daemo
 
     expected_metrics = [
         {
-            "name": "impala.jvm.gc.count",
+            "name": "impala.daemon.jvm.gc.count",
             "type": aggregator.MONOTONIC_COUNT,
         },
     ]
@@ -44,5 +44,84 @@ def test_daemon_check_integration_assert_service_check(dd_run_check, aggregator,
 @pytest.mark.usefixtures("dd_environment")
 def test_daemon_check_integration_assert_metrics_using_metadata(dd_run_check, aggregator, daemon_instance):
     check = ImpalaCheck("impala", {}, [daemon_instance])
+    dd_run_check(check)
+    aggregator.assert_metrics_using_metadata(get_metadata_metrics())
+
+
+@pytest.mark.integration
+@pytest.mark.usefixtures("dd_environment")
+def test_statestore_check_integration_assert_metrics(dd_run_check, aggregator, statestore_instance):
+    check = ImpalaCheck("impala", {}, [statestore_instance])
+    dd_run_check(check)
+
+    expected_metrics = [
+        {
+            "name": "impala.statestore.live_backends",
+        },
+    ]
+
+    for expected_metric in expected_metrics:
+        aggregator.assert_metric(
+            name=expected_metric["name"],
+            metric_type=expected_metric.get("type", aggregator.GAUGE),
+            tags=expected_metric.get("tags", ["endpoint:http://localhost:25010/metrics_prometheus"]),
+        )
+
+    aggregator.assert_all_metrics_covered()
+    aggregator.assert_no_duplicate_all()
+
+
+@pytest.mark.integration
+@pytest.mark.usefixtures("dd_environment")
+def test_statestore_check_integration_assert_service_check(dd_run_check, aggregator, statestore_instance):
+    check = ImpalaCheck("impala", {}, [statestore_instance])
+    dd_run_check(check)
+    aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
+
+
+@pytest.mark.integration
+@pytest.mark.usefixtures("dd_environment")
+def test_statestore_check_integration_assert_metrics_using_metadata(dd_run_check, aggregator, statestore_instance):
+    check = ImpalaCheck("impala", {}, [statestore_instance])
+    dd_run_check(check)
+    aggregator.assert_metrics_using_metadata(get_metadata_metrics())
+
+
+@pytest.mark.integration
+@pytest.mark.usefixtures("dd_environment")
+def test_catalog_check_integration_assert_metrics(dd_run_check, aggregator, catalog_instance):
+    check = ImpalaCheck("impala", {}, [catalog_instance])
+    dd_run_check(check)
+
+    expected_metrics = [
+        {
+            "name": "impala.catalog.jvm.gc.count",
+            "type": aggregator.MONOTONIC_COUNT,
+        },
+    ]
+
+    for expected_metric in expected_metrics:
+        aggregator.assert_metric(
+            name=expected_metric["name"],
+            metric_type=expected_metric.get("type", aggregator.GAUGE),
+            tags=expected_metric.get("tags", ["endpoint:http://localhost:25020/metrics_prometheus"]),
+        )
+
+    aggregator.assert_all_metrics_covered()
+    aggregator.assert_no_duplicate_all()
+
+
+@pytest.mark.integration
+@pytest.mark.usefixtures("dd_environment")
+def test_catalog_check_integration_assert_service_check(dd_run_check, aggregator, catalog_instance):
+    check = ImpalaCheck("impala", {}, [catalog_instance])
+    dd_run_check(check)
+    aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
+
+
+@pytest.mark.integration
+@pytest.mark.usefixtures("dd_environment")
+def test_catalog_check_integration_assert_metrics_using_metadata(dd_run_check, aggregator, catalog_instance):
+    check = ImpalaCheck("impala", {}, [catalog_instance])
     dd_run_check(check)
     aggregator.assert_metrics_using_metadata(get_metadata_metrics())

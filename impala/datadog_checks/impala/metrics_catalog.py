@@ -1,1 +1,0 @@
-METRIC_MAP = {}

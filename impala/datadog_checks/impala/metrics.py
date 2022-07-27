@@ -1,4 +1,12 @@
-METRIC_MAP = {
+CATALOG_METRIC_MAP = {
+    "impala_jvm_gc_count": "catalog.jvm.gc",
+}
+
+DAEMON_METRIC_MAP = {
+    "impala_jvm_gc_count": "daemon.jvm.gc",
+}
+
+STATESTORE_METRIC_MAP = {
     "impala_statestore_live_backends": "statestore.live_backends",
     # "impala_statestore_total_key_size_bytes": "statestore.total_key_size",
     # "impala_statestore_total_value_size_bytes": "statestore.total_value_size",

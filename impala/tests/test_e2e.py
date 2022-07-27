@@ -14,7 +14,7 @@ def test_daemon_check_e2e_assert_metrics(dd_agent_check, daemon_instance):
 
     expected_metrics = [
         {
-            "name": "impala.jvm.gc.count",
+            "name": "impala.daemon.jvm.gc.count",
             "type": aggregator.COUNT,
         },
     ]
