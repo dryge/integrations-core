@@ -37,7 +37,7 @@ def test_daemon_check_integration_assert_metrics(dd_run_check, aggregator, daemo
 def test_daemon_check_integration_assert_service_check(dd_run_check, aggregator, daemon_instance):
     check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
-    aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
+    aggregator.assert_service_check("impala.daemon.openmetrics.health", status=ImpalaCheck.OK)
 
 
 @pytest.mark.integration
@@ -76,7 +76,7 @@ def test_statestore_check_integration_assert_metrics(dd_run_check, aggregator, s
 def test_statestore_check_integration_assert_service_check(dd_run_check, aggregator, statestore_instance):
     check = ImpalaCheck("impala", {}, [statestore_instance])
     dd_run_check(check)
-    aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
+    aggregator.assert_service_check("impala.statestore.openmetrics.health", status=ImpalaCheck.OK)
 
 
 @pytest.mark.integration
@@ -116,7 +116,7 @@ def test_catalog_check_integration_assert_metrics(dd_run_check, aggregator, cata
 def test_catalog_check_integration_assert_service_check(dd_run_check, aggregator, catalog_instance):
     check = ImpalaCheck("impala", {}, [catalog_instance])
     dd_run_check(check)
-    aggregator.assert_service_check("impala.openmetrics.health", status=ImpalaCheck.OK)
+    aggregator.assert_service_check("impala.catalog.openmetrics.health", status=ImpalaCheck.OK)
 
 
 @pytest.mark.integration
