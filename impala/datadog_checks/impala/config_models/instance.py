@@ -9,7 +9,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Mapping, Optional, Sequence, Union
+from typing import Any, Literal, Mapping, Optional, Sequence, Union
 
 from pydantic import BaseModel, Extra, Field, root_validator, validator
 
@@ -123,6 +123,7 @@ class InstanceConfig(BaseModel):
     rename_labels: Optional[Mapping[str, Any]]
     request_size: Optional[float]
     service: Optional[str]
+    service_type: Literal['daemon', 'statestore', 'catalog']
     share_labels: Optional[Mapping[str, Union[bool, ShareLabel]]]
     skip_proxy: Optional[bool]
     tag_by_endpoint: Optional[bool]
