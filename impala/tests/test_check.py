@@ -21,7 +21,7 @@ def test_daemon_mock_assert_metrics_using_metadata(dd_run_check, aggregator, dae
 def test_daemon_mock_assert_service_check(dd_run_check, aggregator, daemon_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
-    aggregator.assert_service_check("impala.daemon.openmetrics.health", status=ImpalaCheck.OK)
+    aggregator.assert_service_check("impala.daemon.openmetrics.health", status=ImpalaCheck.OK, tags=['endpoint:http://localhost:25000/metrics_prometheus'])
 
 
 @pytest.mark.unit
@@ -63,7 +63,7 @@ def test_statestore_mock_assert_metrics_using_metadata(dd_run_check, aggregator,
 def test_statestore_mock_assert_service_check(dd_run_check, aggregator, statestore_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [statestore_instance])
     dd_run_check(check)
-    aggregator.assert_service_check("impala.statestore.openmetrics.health", status=ImpalaCheck.OK)
+    aggregator.assert_service_check("impala.statestore.openmetrics.health", status=ImpalaCheck.OK, tags=['endpoint:http://localhost:25010/metrics_prometheus'])
 
 
 @pytest.mark.unit
@@ -104,7 +104,7 @@ def test_catalog_mock_assert_metrics_using_metadata(dd_run_check, aggregator, ca
 def test_catalog_mock_assert_service_check(dd_run_check, aggregator, catalog_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [catalog_instance])
     dd_run_check(check)
-    aggregator.assert_service_check("impala.catalog.openmetrics.health", status=ImpalaCheck.OK)
+    aggregator.assert_service_check("impala.catalog.openmetrics.health", status=ImpalaCheck.OK, tags=['endpoint:http://localhost:25020/metrics_prometheus'])
 
 
 @pytest.mark.unit
