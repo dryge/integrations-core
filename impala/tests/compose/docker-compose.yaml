@@ -35,8 +35,6 @@ services:
     ports:
       # Web debug UI
       - "0.0.0.0:25020:25020"
-      # JMX endpoint.
-      - "0.0.0.0:25021:25021"
     command: ["-redirect_stdout_stderr=false", "-logtostderr", "-v=1",
               "-hms_event_polling_interval_s=1", "-invalidate_tables_timeout_s=999999"]
     volumes:
