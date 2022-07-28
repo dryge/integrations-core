@@ -25,6 +25,7 @@ class ImpalaCheck(OpenMetricsBaseCheckV2, ConfigMixin):
                 "metrics": [CATALOG_METRIC_MAP],
             }
 
+        # TODO handle this case properly
         return {}
 
     def service_check(self, name, status, tags=None, hostname=None, message=None, raw=False):
