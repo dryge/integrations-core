@@ -88,7 +88,7 @@ def test_catalog_check_e2e_assert_metrics(dd_agent_check, catalog_instance):
         aggregator.assert_metric(
             name=expected_metric["name"],
             metric_type=expected_metric.get("type", aggregator.GAUGE),
-            tags=expected_metric.get("tags", ["endpoint:http://localhost:25000/metrics_prometheus"]),
+            tags=expected_metric.get("tags", ["endpoint:http://localhost:25020/metrics_prometheus"]),
         )
 
     aggregator.assert_all_metrics_covered()
