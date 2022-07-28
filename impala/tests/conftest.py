@@ -63,6 +63,7 @@ def catalog_instance():
         "service_type": "catalog",
     }
 
+
 @pytest.fixture()
 def mock_metrics(request):
     filename = request.node.get_closest_marker("filename")
