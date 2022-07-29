@@ -5,7 +5,6 @@
 import pytest
 
 from datadog_checks.base import ConfigurationError
-from datadog_checks.dev.utils import get_metadata_metrics
 from datadog_checks.impala import ImpalaCheck
 
 
@@ -20,7 +19,11 @@ def test_config_unknown_service_type():
         check = ImpalaCheck("Impala", {}, [instance])
         check.load_configuration_models()
 
-    assert exception_info.value.args[0] == 'Detected 1 error while loading configuration model `InstanceConfig`:\nservice_type\n  unexpected value; permitted: \'daemon\', \'statestore\', \'catalog\''
+    assert (
+        exception_info.value.args[0]
+        == 'Detected 1 error while loading configuration model `InstanceConfig`:\nservice_type\n  unexpected value; '
+        'permitted: \'daemon\', \'statestore\', \'catalog\''
+    )
 
 
 @pytest.mark.unit
