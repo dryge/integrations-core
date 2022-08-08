@@ -3,7 +3,9 @@
 # Licensed under a 3-clause BSD style license (see LICENSE)
 from datadog_checks.base import OpenMetricsBaseCheckV2
 from datadog_checks.impala.config_models import ConfigMixin
-from datadog_checks.impala.metrics import CATALOG_METRIC_MAP, DAEMON_METRIC_MAP, STATESTORE_METRIC_MAP
+from datadog_checks.impala.metrics_catalog import CATALOG_METRIC_MAP
+from datadog_checks.impala.metrics_daemon import DAEMON_METRIC_MAP
+from datadog_checks.impala.metrics_statestore import STATESTORE_METRIC_MAP
 
 
 class ImpalaCheck(OpenMetricsBaseCheckV2, ConfigMixin):
