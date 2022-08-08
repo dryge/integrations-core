@@ -65,6 +65,7 @@ def test_config_unknown_service_type_can_not_be_none():
         'none is not an allowed value'
     )
 
+
 @pytest.mark.unit
 @pytest.mark.parametrize(
     'service_type',
