@@ -9,10 +9,17 @@ from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.mark.unit
-def test_config_unknown_service_type():
+@pytest.mark.parametrize(
+    'service_type',
+    [
+        "unknown",
+        "",
+    ],
+)
+def test_config_unknown_service_type(service_type):
     instance = {
         "openmetrics_endpoint": "http://localhost:25000/metrics_prometheus",
-        "service_type": "unknown",
+        "service_type": service_type,
     }
 
     with pytest.raises(ConfigurationError) as exception_info:
@@ -21,10 +28,42 @@ def test_config_unknown_service_type():
 
     assert (
         exception_info.value.args[0]
-        == 'Detected 1 error while loading configuration model `InstanceConfig`:\nservice_type\n  unexpected value; '
-        'permitted: \'daemon\', \'statestore\', \'catalog\''
+        == 'Detected 1 error while loading configuration model `InstanceConfig`:\nservice_type\n  '
+        'unexpected value; permitted: \'daemon\', \'statestore\', \'catalog\''
     )
 
+
+def test_config_unknown_service_type_mandatory():
+    instance = {
+        "openmetrics_endpoint": "http://localhost:25000/metrics_prometheus",
+    }
+
+    with pytest.raises(ConfigurationError) as exception_info:
+        check = ImpalaCheck("Impala", {}, [instance])
+        check.load_configuration_models()
+
+    assert (
+        exception_info.value.args[0]
+        == 'Detected 1 error while loading configuration model `InstanceConfig`:\nservice_type\n  '
+        'field required'
+    )
+
+
+def test_config_unknown_service_type_can_not_be_none():
+    instance = {
+        "openmetrics_endpoint": "http://localhost:25000/metrics_prometheus",
+        "service_type": None,
+    }
+
+    with pytest.raises(ConfigurationError) as exception_info:
+        check = ImpalaCheck("Impala", {}, [instance])
+        check.load_configuration_models()
+
+    assert (
+        exception_info.value.args[0]
+        == 'Detected 1 error while loading configuration model `InstanceConfig`:\nservice_type\n  '
+        'none is not an allowed value'
+    )
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
