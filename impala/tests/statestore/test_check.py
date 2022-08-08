@@ -9,7 +9,7 @@ from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.mark.unit
-@pytest.mark.filename("statestored-metrics.txt")
+@pytest.mark.metrics_filename("statestored-metrics.txt")
 def test_statestore_mock_assert_metrics_using_metadata(dd_run_check, aggregator, statestore_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [statestore_instance])
     dd_run_check(check)
@@ -17,7 +17,7 @@ def test_statestore_mock_assert_metrics_using_metadata(dd_run_check, aggregator,
 
 
 @pytest.mark.unit
-@pytest.mark.filename("statestored-metrics.txt")
+@pytest.mark.metrics_filename("statestored-metrics.txt")
 def test_statestore_mock_assert_service_check(dd_run_check, aggregator, statestore_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [statestore_instance])
     dd_run_check(check)
@@ -29,7 +29,7 @@ def test_statestore_mock_assert_service_check(dd_run_check, aggregator, statesto
 
 
 @pytest.mark.unit
-@pytest.mark.filename("statestored-metrics.txt")
+@pytest.mark.metrics_filename("statestored-metrics.txt")
 def test_statestore_mock_assert_metrics(dd_run_check, aggregator, statestore_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [statestore_instance])
     dd_run_check(check)

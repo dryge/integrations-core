@@ -10,8 +10,12 @@ from datadog_checks.dev import docker_run, get_docker_hostname, get_here
 from datadog_checks.dev.conditions import CheckDockerLogs
 
 
+def pytest_configure(config):
+    config.addinivalue_line("markers", "metrics_filename(name): The name of the fixture file to use for this test")
+
+
 @pytest.fixture(scope="session")
-def dd_environment(request):
+def dd_environment():
     compose_file = os.path.join(get_here(), "compose", "docker-compose.yaml")
     with docker_run(
         compose_file=compose_file,
@@ -66,7 +70,7 @@ def catalog_instance():
 
 @pytest.fixture()
 def mock_metrics(request):
-    filename = request.node.get_closest_marker("filename")
+    filename = request.node.get_closest_marker("metrics_filename")
     with open(os.path.join(os.path.dirname(__file__), "fixtures", filename.args[0]), "r") as fixture_file:
         content = fixture_file.read()
 

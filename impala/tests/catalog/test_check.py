@@ -9,7 +9,7 @@ from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.mark.unit
-@pytest.mark.filename("catalogd-metrics.txt")
+@pytest.mark.metrics_filename("catalogd-metrics.txt")
 def test_catalog_mock_assert_metrics_using_metadata(dd_run_check, aggregator, catalog_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [catalog_instance])
     dd_run_check(check)
@@ -17,7 +17,7 @@ def test_catalog_mock_assert_metrics_using_metadata(dd_run_check, aggregator, ca
 
 
 @pytest.mark.unit
-@pytest.mark.filename("catalogd-metrics.txt")
+@pytest.mark.metrics_filename("catalogd-metrics.txt")
 def test_catalog_mock_assert_service_check(dd_run_check, aggregator, catalog_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [catalog_instance])
     dd_run_check(check)
@@ -29,7 +29,7 @@ def test_catalog_mock_assert_service_check(dd_run_check, aggregator, catalog_ins
 
 
 @pytest.mark.unit
-@pytest.mark.filename("catalogd-metrics.txt")
+@pytest.mark.metrics_filename("catalogd-metrics.txt")
 def test_catalog_mock_assert_metrics(dd_run_check, aggregator, catalog_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [catalog_instance])
     dd_run_check(check)

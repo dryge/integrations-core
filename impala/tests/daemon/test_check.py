@@ -9,7 +9,7 @@ from datadog_checks.impala import ImpalaCheck
 
 
 @pytest.mark.unit
-@pytest.mark.filename("impalad-metrics.txt")
+@pytest.mark.metrics_filename("impalad-metrics.txt")
 def test_daemon_mock_assert_metrics_using_metadata(dd_run_check, aggregator, daemon_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
@@ -17,7 +17,7 @@ def test_daemon_mock_assert_metrics_using_metadata(dd_run_check, aggregator, dae
 
 
 @pytest.mark.unit
-@pytest.mark.filename("impalad-metrics.txt")
+@pytest.mark.metrics_filename("impalad-metrics.txt")
 def test_daemon_mock_assert_service_check(dd_run_check, aggregator, daemon_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
@@ -29,7 +29,7 @@ def test_daemon_mock_assert_service_check(dd_run_check, aggregator, daemon_insta
 
 
 @pytest.mark.unit
-@pytest.mark.filename("impalad-metrics.txt")
+@pytest.mark.metrics_filename("impalad-metrics.txt")
 def test_daemon_mock_assert_metrics(dd_run_check, aggregator, daemon_instance, mock_metrics):
     check = ImpalaCheck("impala", {}, [daemon_instance])
     dd_run_check(check)
